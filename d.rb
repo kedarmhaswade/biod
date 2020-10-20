@@ -118,12 +118,23 @@ class Row
   end
 end
 
+def help()
+  prg = File.basename(__FILE__)
+  <<-HELP
+   #{prg} s <term>: search the affix <term>
+   #{prg} f <term>: search the affix <term> (same as s)
+   #{prg} q       : quizzes you for some random affixes
+  HELP
+end
 # main program
-
+if ARGV.length == 0
+  puts(help)
+  exit 2
+end
 command = ARGV.shift
 arguments = ARGV
 
-page = Page.new('d.html')
+page = Page.new(__dir__ + '/d.html')
 
 if command.start_with? 'f' or command.start_with? 's'
   # search or find
